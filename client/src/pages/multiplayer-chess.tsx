@@ -13,7 +13,7 @@ const ChessGame: React.FC = () => {
   const [winner, setWinner] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [currentPlayer, setCurrentPlayer] = useState<string>("White"); // Add state to track the current player
-  const [selectedSquare, setSelectedSquare] = useState<Square | null>(null);
+  // const [selectedSquare, setSelectedSquare] = useState<Square | null>(null);
   const [possibleMoves, setPossibleMoves] = useState<string[]>([]);
   // Function to handle making a move
   function makeAMove(move: {
@@ -47,7 +47,7 @@ const ChessGame: React.FC = () => {
       setCurrentPlayer(gameCopy.turn() === "w" ? "White" : "Black");
     }
     setPossibleMoves([]);
-    setSelectedSquare(null);
+    // setSelectedSquare(null);
     return result;
   }
 
@@ -69,7 +69,7 @@ const ChessGame: React.FC = () => {
       const moves = game
         .moves({ square, verbose: true })
         .map((move) => move.to);
-      setSelectedSquare(square);
+      // setSelectedSquare(square);
       setPossibleMoves(moves);
     }
   };
