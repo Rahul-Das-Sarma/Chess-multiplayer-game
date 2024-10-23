@@ -4,7 +4,7 @@ import { Chess, Move, Square } from "chess.js";
 import { capturedObjs } from "../utils/imageConstants";
 import TimeDisplay from "../components/timer";
 import Moves from "../components/Move";
-import Modal from "../components/modal";
+import Modal from "../components/result";
 
 const ChessGame: React.FC = () => {
   const [game, setGame] = useState<Chess>(new Chess()); // Initialize chess game state
@@ -111,44 +111,46 @@ const ChessGame: React.FC = () => {
   );
 
   return (
-    <div className="flex justify-center flex-col laptop:flex-row relative">
-      <div className="m-4 hidden laptop:block">
-        <h2 className="text-white">White's Captured Pieces</h2>
-        <div className="flex flex-col flex-wrap h-[60vh]">
-          {renderCapturedPieces(whiteCaptured, "w")}
+    <div className="flex justify-center items-center h-[100vh] bg-transparent">
+      <div className="flex justify-center flex-col laptop:flex-row relative">
+        <div className="m-4 hidden laptop:block">
+          <h2 className="text-black">White's Captured Pieces</h2>
+          <div className="flex flex-col flex-wrap h-[60vh]">
+            {renderCapturedPieces(whiteCaptured, "w")}
+          </div>
         </div>
-      </div>
 
-      <div className="flex justify-center items-center w-full laptop:w-[40vw] laptop:mt-[5%]">
-        <Chessboard
-          position={game.fen()}
-          onPieceDrop={onDrop}
-          onSquareClick={onPieceClick}
-          customSquareStyles={
-            possibleMoves.length > 0
-              ? {
-                  ...squareStyles,
-                }
-              : {}
-          }
-        />
-      </div>
-      <div className="m-4 block laptop:hidden">
-        <h2 className="text-white">White's Captured Pieces</h2>
-        <div className="flex flex-row flex-wrap laptop:h-[60vh]">
-          {renderCapturedPieces(whiteCaptured, "w")}
+        <div className="flex justify-center items-center w-full laptop:w-[40vw] laptop:mt-[5%]">
+          <Chessboard
+            position={game.fen()}
+            onPieceDrop={onDrop}
+            onSquareClick={onPieceClick}
+            customSquareStyles={
+              possibleMoves.length > 0
+                ? {
+                    ...squareStyles,
+                  }
+                : {}
+            }
+          />
         </div>
-      </div>
-      <div className="m-4">
-        <h2 className="text-white">Black's Captured Pieces</h2>
-        <div className="flex laptop:flex-col flex-row flex-wrap laptop:h-[60vh]">
-          {renderCapturedPieces(blackCaptured, "b")}
+        <div className="m-4 block laptop:hidden">
+          <h2 className="text-black">White's Captured Pieces</h2>
+          <div className="flex flex-row flex-wrap laptop:h-[60vh]">
+            {renderCapturedPieces(whiteCaptured, "w")}
+          </div>
         </div>
-      </div>
+        <div className="m-4">
+          <h2 className="text-black">Black's Captured Pieces</h2>
+          <div className="flex laptop:flex-col flex-row flex-wrap laptop:h-[60vh]">
+            {renderCapturedPieces(blackCaptured, "b")}
+          </div>
+        </div>
 
-      <Moves player={currentPlayer} />
-      <TimeDisplay totalSeconds={0} />
-      <Modal isOpen={isModalOpen} winner={winner} onClose={closeModal} />
+        <Moves player={currentPlayer} />
+        <TimeDisplay totalSeconds={0} />
+        <Modal isOpen={isModalOpen} winner={winner} onClose={closeModal} />
+      </div>
     </div>
   );
 };

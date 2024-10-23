@@ -1,30 +1,27 @@
 import React from "react";
+import { FaTimes } from "react-icons/fa"; // Import the close icon from react-icons
 
 interface ModalProps {
   isOpen: boolean;
-  winner: string | null;
   onClose: () => void;
+  title: string;
+  content: React.ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, winner, onClose }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, content }) => {
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
-        <h2 className="text-2xl font-semibold mb-4 text-center">
-          {winner ? `${winner} Wins!` : "It’s a Draw!"}
-        </h2>
-        <img
-          src="https://media1.tenor.com/m/AWGIkbz2B-EAAAAC/aag-lagadi-anu-malik.gif"
-          alt="Emotion_gif"
-        />
+      <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full relative">
         <button
-          className="mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none"
+          className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
           onClick={onClose}
         >
-          Start a new game
+          <FaTimes size={20} />
         </button>
+        <h2 className="text-2xl font-semibold mb-4 text-center">{title}</h2>
+        <div className="mb-6 text-center">{content}</div>
       </div>
     </div>
   );
