@@ -44,7 +44,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<WelcomePage />} />
-          <Route path="/game" element={<ChessBoard />} />
+          <Route path="/play/:id" element={<ChessBoard />} />
         </Routes>
       </Router>
     </div>

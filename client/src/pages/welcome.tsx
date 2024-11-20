@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import Modal from "../components/modal"; // Adjust the import path as necessary
+import { useNavigate } from "react-router-dom";
+import Modal from "../components/modal";
 
 const WelcomePage: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   const startGame = () => {
     closeModal();
-    navigate("/game"); // Navigate to the game page
+    navigate("/play/1");
   };
 
   return (
