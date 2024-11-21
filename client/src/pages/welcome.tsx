@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "../components/modal";
+import useQuery from "../hooks/useQuery";
+import { generateGameLink } from "../services/gameService";
 
 const WelcomePage: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -8,11 +10,12 @@ const WelcomePage: React.FC = () => {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-
+  const { data, loading, error } = useQuery(generateGameLink);
   const startGame = () => {
     closeModal();
-    navigate("/play/1");
+    // navigate("/play/1");
   };
+  console.log(data);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-transparent">
