@@ -20,7 +20,7 @@ const WelcomePage: React.FC = () => {
 
   const openModal = () => {
     setIsModalOpen(true);
-    mutate(); // Trigger the API call when opening the modal
+    mutate();
   };
 
   const closeModal = () => setIsModalOpen(false);
@@ -35,6 +35,12 @@ const WelcomePage: React.FC = () => {
     }
   };
 
+  const copyLink = () => {
+    if (data?.link) {
+      navigator.clipboard.writeText(data.link);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-transparent">
       <h1 className="text-4xl font-bold mb-4">Welcome to the Chess Game!</h1>
@@ -44,7 +50,7 @@ const WelcomePage: React.FC = () => {
       <button
         className="bg-blue-500 text-white px-4 py-2 rounded"
         onClick={openModal}
-        disabled={loading} // Disable button while loading
+        disabled={loading}
       >
         {loading ? "Loading..." : "Learn More"}
       </button>
@@ -67,7 +73,11 @@ const WelcomePage: React.FC = () => {
                 <div className="flex items-center justify-center p-2 bg-slate-100 w-[500px] mt-4">
                   <p className="text-blue-500 mt-2 text-sm">{data.link}</p>
                   <div className="ml-4">
-                    <AiFillCopy size={20} />
+                    <AiFillCopy
+                      size={20}
+                      onClick={copyLink}
+                      className="cursor-pointer hover:text-blue-600 focus:scale-90 transition-transform duration-200 ease-in-out active:scale-110 active:transform-gpu"
+                    />
                   </div>
                 </div>
               </>
@@ -82,7 +92,7 @@ const WelcomePage: React.FC = () => {
               <button
                 className="bg-green-500 text-white px-4 py-2 rounded"
                 onClick={startGame}
-                disabled={!data || loading} // Disable button if data is not available
+                disabled={!data || loading}
               >
                 Start Game
               </button>

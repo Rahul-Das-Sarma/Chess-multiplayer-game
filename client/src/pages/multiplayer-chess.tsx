@@ -7,12 +7,12 @@ import Moves from "../components/Move";
 import Modal from "../components/result";
 
 const ChessGame: React.FC = () => {
-  const [game, setGame] = useState<Chess>(new Chess()); // Initialize chess game state
-  const [whiteCaptured, setWhiteCaptured] = useState<string[]>([]); // Track white pieces captured
-  const [blackCaptured, setBlackCaptured] = useState<string[]>([]); // Track black pieces captured
+  const [game, setGame] = useState<Chess>(new Chess());
+  const [whiteCaptured, setWhiteCaptured] = useState<string[]>([]);
+  const [blackCaptured, setBlackCaptured] = useState<string[]>([]);
   const [winner, setWinner] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [currentPlayer, setCurrentPlayer] = useState<string>("White"); // Add state to track the current player
+  const [currentPlayer, setCurrentPlayer] = useState<string>("White");
   // const [selectedSquare, setSelectedSquare] = useState<Square | null>(null);
   const [possibleMoves, setPossibleMoves] = useState<string[]>([]);
   // Function to handle making a move
@@ -43,7 +43,6 @@ const ChessGame: React.FC = () => {
       }
       setIsModalOpen(true); // Show modal with result
     } else {
-      // Update the current player
       setCurrentPlayer(gameCopy.turn() === "w" ? "White" : "Black");
     }
     setPossibleMoves([]);
@@ -63,18 +62,16 @@ const ChessGame: React.FC = () => {
     return true;
   }
 
-  // Show Possible moves
   const onPieceClick = (square: Square) => {
     if (game.get(square)) {
       const moves = game
         .moves({ square, verbose: true })
         .map((move) => move.to);
-      // setSelectedSquare(square);
+
       setPossibleMoves(moves);
     }
   };
 
-  // Helper function to render captured pieces
   const renderCapturedPieces = (pieces: string[], str: string) => {
     return pieces.map((piece, index) => (
       <div key={index} className="captured-piece">
