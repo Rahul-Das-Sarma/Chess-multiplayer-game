@@ -94,7 +94,7 @@ const ChessGame: React.FC = () => {
     setGame(new Chess()); // Reset game
     setWhiteCaptured([]);
     setBlackCaptured([]);
-    setCurrentPlayer("White"); // Reset to white's turn
+    setCurrentPlayer("White");
   };
 
   const squareStyles = possibleMoves.reduce(
